@@ -12,9 +12,6 @@ class WebhookDiffHelper
 
     public function __construct(array $previous, array $current)
     {
-        Log::error('Previous', $previous);
-        Log::error('Current', $current);
-
         $diff = [];
         foreach ($current as $key => $value) {
             if ($previous[$key] !== $value) {
@@ -23,8 +20,6 @@ class WebhookDiffHelper
         }
 
         $this->diff = $diff;
-
-        Log::error('Diff', $this->diff);
     }
 
     public static function create(array $previous, array $current): self
