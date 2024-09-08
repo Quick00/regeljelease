@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Pipedrive\CreateWebhookAction;
+use App\Domain\Pipedrive\Actions\CreateWebhookAction;
 use Illuminate\Console\Command;
 
 class SetupWebhook extends Command
@@ -13,6 +13,6 @@ class SetupWebhook extends Command
 
     public function handle(): void
     {
-        CreateWebhookAction::run();
+        CreateWebhookAction::run($this);
     }
 }
