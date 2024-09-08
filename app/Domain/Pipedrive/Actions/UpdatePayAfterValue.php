@@ -11,10 +11,10 @@ class UpdatePayAfterValue
     use AsAction;
     use PipedriveRequestTrait;
 
-    public function handle(int $dealId, int $newPayAfterValue): void
+    public function handle(int $dealId, int $dealValue, int $payBeforeValue): void
     {
         $this->putRequest(sprintf('deals/%d', $dealId), [
-            Pipedrive::PAY_AFTER_VALUE => $newPayAfterValue,
+            Pipedrive::PAY_AFTER_VALUE => ($dealValue - $payBeforeValue),
         ]);
     }
 }

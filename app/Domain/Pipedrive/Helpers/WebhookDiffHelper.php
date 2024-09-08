@@ -4,6 +4,7 @@ namespace App\Domain\Pipedrive\Helpers;
 
 use App\Domain\Pipedrive\Pipedrive;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class WebhookDiffHelper
 {
@@ -11,7 +12,19 @@ class WebhookDiffHelper
 
     public function __construct(array $previous, array $current)
     {
-        $this->diff = array_diff($current, $previous);
+        Log::error('Previous', $previous);
+        Log::error('Current', $current);
+
+        $diff = [];
+        foreach ($current as $key => $value) {
+            if ($previous[$key] !== $value) {
+                $diff[$key] = $value;
+            }
+        }
+
+        $this->diff = $diff;
+
+        Log::error('Diff', $this->diff);
     }
 
     public static function create(array $previous, array $current): self
