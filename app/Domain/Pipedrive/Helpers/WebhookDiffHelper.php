@@ -4,7 +4,6 @@ namespace App\Domain\Pipedrive\Helpers;
 
 use App\Domain\Pipedrive\Pipedrive;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 
 class WebhookDiffHelper
 {
@@ -14,7 +13,9 @@ class WebhookDiffHelper
     {
         $diff = [];
         foreach ($current as $key => $value) {
-            if ($previous[$key] !== $value) {
+            $previousValue = Arr::get($previous, $key);
+
+            if ($previousValue !== $value) {
                 $diff[$key] = $value;
             }
         }
